@@ -1,9 +1,3 @@
-// Function to get current day of the week
-function getCurrentDay() {
-    const now = new Date();
-    return now.toLocaleString('default', { weekday: 'long' }).toLowerCase();
-}
-
 // Function to sort tasks by day and importance
 function sortTasks(tasks) {
     return tasks.sort((a, b) => {
@@ -29,8 +23,6 @@ function displayTasks(tasks) {
     tasksList.innerHTML = '';
 
     const sortedTasks = sortTasks(tasks);
-
-    const currentDay = getCurrentDay().toLowerCase();
     let formattedTasks = {};
 
     sortedTasks.forEach(task => {
@@ -43,7 +35,7 @@ function displayTasks(tasks) {
     Object.keys(formattedTasks).forEach(day => {
         const dayTasks = formattedTasks[day];
         const dayHeader = document.createElement('h3');
-        dayHeader.textContent = `${day} (${formatDate(day)}):`;
+        dayHeader.textContent = `${day.charAt(0).toUpperCase() + day.slice(1)} (${formatDate(day)}):`;
         tasksList.appendChild(dayHeader);
 
         dayTasks.forEach(task => {
