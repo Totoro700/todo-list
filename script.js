@@ -43,57 +43,31 @@ function displayTasks(tasks) {
     Object.keys(formattedTasks).forEach(day => {
         const dayTasks = formattedTasks[day];
         const dayHeader = document.createElement('h3');
-        dayHeader.textContent = `${day.charAt(0).toUpperCase() + day.slice(1)} (${formatDate(day)}):`;
+        dayHeader.textContent = `${day} (${formatDate(day)}):`;
         tasksList.appendChild(dayHeader);
 
         dayTasks.forEach(task => {
             const taskItem = document.createElement('div');
             taskItem.className = 'task-item';
-
-            // Create a paragraph element for the task name
-            const taskParagraph = document.createElement('p');
             
-            // Set the innerHTML of the paragraph based on importance
+            // Create a separate span for the task name
+            const taskNameSpan = document.createElement('span');
+            taskNameSpan.className = 'task-name';
+            taskNameSpan.textContent = task.taskName;
+
+            // Conditionally add importance class
             if (task.isImportant) {
-                taskParagraph.innerHTML = `<strong>${task.taskName}</strong><br>${task.description || ''}`;
-            } else {
-                taskParagraph.innerHTML = `${task.taskName}<br>${task.description || ''}`;
-            }
-            
-            // Add importance styling
-            if (task.isImportant) {
-                const importantSpan = document.createElement('span');
-                importantSpan.className = 'important-task';
-                importantSpan.textContent = task.taskName;
-                taskParagraph.insertBefore(importantSpan, taskParagraph.firstChild);
+                taskNameSpan.classList.add('important-task');
             }
 
-            // Add checkbox
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = `task-${task.taskName.replace(/\s+/g, '-')}`;
-            checkbox.className = 'task-checkbox';
-            checkbox.checked = task.done || false; // Default to unchecked
+            // Add other task details
+            const taskDetails = document.createElement('div');
+            taskDetails.textContent = task.description || '';
 
-            const label = document.createElement('label');
-            label.htmlFor = `task-${task.taskName.replace(/\s+/g, '-')}`;
-            label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(' Done'));
+            // Combine task name and details
+            taskItem.appendChild(taskNameSpan);
+            taskItem.appendChild(taskDetails);
 
-            // Add event listener for checkbox
-            checkbox.addEventListener('change', function() {
-                task.done = this.checked;
-                saveTasksToLocalStorage(tasks);
-                displayTasks(tasks);
-            });
-
-            // Add strikethrough if task is done
-            if (task.done) {
-                taskParagraph.style.textDecoration = 'line-through';
-            }
-
-            taskItem.appendChild(label);
-            taskItem.appendChild(taskParagraph);
             tasksList.appendChild(taskItem);
         });
     });
