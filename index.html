@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .task-form {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .tasks-list {
+            margin-top: 20px;
+        }
+        .task-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-left: 5px solid #007bff;
+        }
+        .important-task {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Weekly Todo List</h1>
+    
+    <form id="todoForm">
+        <select id="dayOfWeek" required>
+            <option value="">Select a day</option>
+            <option value="monday">Monday</option>
+            <option value="tuesday">Tuesday</option>
+            <option value="wednesday">Wednesday</option>
+            <option value="thursday">Thursday</option>
+            <option value="friday">Friday</option>
+            <option value="saturday">Saturday</option>
+            <option value="sunday">Sunday</option>
+        </select>
+        <input type="text" id="taskName" placeholder="Task Name" required>
+        <input id="description" placeholder="Description (optional)"></input>
+        <label class="important-checkbox">
+            <input type="checkbox" id="isImportant"> Important
+        </label>
+        <button type="submit">Add Task</button>
+        <button id="clearButton">Clear Todo List</button>
+    </form>
+
+    <div id="tasksList" class="tasks-list"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

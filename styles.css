@@ -1,0 +1,24 @@
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.event-form {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+.events-list {
+    margin-top: 20px;
+}
+.event-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-left: 5px solid #007bff;
+}
+.important-checkbox {
+    margin-right: 5px;
+    font-weight: bold;
+}
